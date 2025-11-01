@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Dashboard - Leave Summary</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .card { 
+            border: 2px solid #007bff; 
+            padding: 20px; 
+            margin: 10px; 
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .leave-balance { 
+            font-size: 24px; 
+            font-weight: bold;
+            color: #333;
+        }
+        .remaining { color: #28a745; }
+        .used { color: #dc3545; }
+        button { 
+            padding: 10px 20px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        #status { margin: 20px 0; padding: 10px; background: #e9ecef; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>📊 Leave Summary Dashboard</h1>
+    <p>Username: <strong id="username">Reshania</strong></p>
+    
+    <div id="status">Loading...</div>
+    
+    <div class="card">
+        <h3>🏥 Sick Leave</h3>
+        <div class="leave-balance">
+            <span class="used" id="sick-used">0</span> / <span id="sick-total">12</span>
+            <div class="remaining">Remaining: <span id="sick-remaining">12</span></div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h3>😊 Casual Leave</h3>
+        <div class="leave-balance">
+            <span class="used" id="casual-used">0</span> / <span id="casual-total">12</span>
+            <div class="remaining">Remaining: <span id="casual-remaining">12</span></div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h3>🏖️ Annual Leave</h3>
+        <div class="leave-balance">
+            <span class="used" id="annual-used">0</span> / <span id="annual-total">6</span>
+            <div class="remaining">Remaining: <span id="annual-remaining">6</span></div>
+        </div>
+    </div>
+    
+    <div class="card" id="maternity-card" style="display: none;">
+        <h3>👶 Maternity Leave</h3>
+        <div class="leave-balance">
+            <span class="used" id="maternity-used">0</span> / <span id="maternity-total">365</span>
+            <div class="remaining">Remaining: <span id="maternity-remaining">365</span></div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h3>⏳ Pending Requests</h3>
+        <div class="leave-balance">
+            <span id="pending-requests">0</span>
+        </div>
+    </div>
+    
+    <button onclick="loadData()">🔄 Refresh Data</button>
+    <button onclick="testUpdate()">🧪 Test Update</button>
+    
+    <script>
+        async function loadData() {
+            document.getElementById('status').textContent = 'Loading...';
+            
+            try {
+                console.log('📡 Fetching leave data...');
+                const response = await fetch('http://localhost:3000/api/leave/Reshania?t=' + Date.now());
+                const data = await response.json();
+                
+                console.log('📊 Received data:', data);
+                
+                // Update all leave types
+                updateLeaveType('sick', data.sickLeaveUsed || 0, 12);
+                updateLeaveType('casual', data.casualLeaveUsed || 0, 12);
+                updateLeaveType('annual', data.annualLeaveUsed || 0, 6);
+                updateLeaveType('maternity', data.maternityLeaveUsed || 0, 365);
+                
+                // Update pending requests
+                document.getElementById('pending-requests').textContent = data.pendingRequests || 0;
+                
+                // Show/hide maternity leave based on gender
+                const maternityCard = document.getElementById('maternity-card');
+                if (data.maternityLeaveUsed > 0 || data.maternityLeaveAttempts > 0) {
+                    maternityCard.style.display = 'block';
+                }
+                
+                document.getElementById('status').innerHTML = '✅ Data loaded successfully!';
+                console.log('🎉 Dashboard updated successfully!');
+                
+            } catch (error) {
+                console.error('❌ Error loading data:', error);
+                document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        function updateLeaveType(type, used, total) {
+            const usedElement = document.getElementById(type + '-used');
+            const remainingElement = document.getElementById(type + '-remaining');
+            
+            if (usedElement) {
+                usedElement.textContent = used;
+            }
+            if (remainingElement) {
+                remainingElement.textContent = Math.max(0, total - used);
+            }
+            
+            console.log(`✅ Updated ${type} leave: ${used} used, ${Math.max(0, total - used)} remaining`);
+        }
+        
+        function testUpdate() {
+            console.log('🧪 Testing manual update...');
+            updateLeaveType('sick', 3, 12);
+            updateLeaveType('casual', 1, 12);
+            updateLeaveType('annual', 2, 6);
+            document.getElementById('status').innerHTML = '🧪 Test update completed!';
+        }
+        
+        // Load data when page loads
+        loadData();
+    </script>
+</body>
+</html>

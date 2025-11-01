@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "username": "admin.user",
+      "email": "admin@company.com",
+      "password": "$2b$10$rQZ8K9mN2pL1vX3yA6bC7dE8fG9hI0jK1lM2nO3pP4qQ5rR6sS7tT8uU9vV0wW1xX2yY3zZ",
+      "department": "Administration",
+      "designation": "System Administrator",
+      "contact": "+1-555-0001",
+      "role": "admin"
+    },
+    {
+      "username": "manager.user",
+      "email": "manager@company.com",
+      "password": "$2b$10$rQZ8K9mN2pL1vX3yA6bC7dE8fG9hI0jK1lM2nO3pP4qQ5rR6sS7tT8uU9vV0wW1xX2yY3zZ",
+      "department": "Management",
+      "designation": "Department Manager",
+      "contact": "+1-555-0002",
+      "role": "manager"
+    },
+    {
+      "username": "john.doe",
+      "email": "john.doe@company.com",
+      "password": "$2b$10$rQZ8K9mN2pL1vX3yA6bC7dE8fG9hI0jK1lM2nO3pP4qQ5rR6sS7tT8uU9vV0wW1xX2yY3zZ",
+      "department": "Engineering",
+      "designation": "Software Developer",
+      "contact": "+1-555-0123",
+      "role": "employee"
+    },
+    {
+      "username": "jane.smith",
+      "email": "jane.smith@company.com",
+      "password": "$2b$10$rQZ8K9mN2pL1vX3yA6bC7dE8fG9hI0jK1lM2nO3pP4qQ5rR6sS7tT8uU9vV0wW1xX2yY3zZ",
+      "department": "HR",
+      "designation": "HR Manager",
+      "contact": "+1-555-0456",
+      "role": "manager"
+    }
+  ],
+  "leaveData": [
+    {
+      "username": "admin.user",
+      "totalLeaves": 30,
+      "usedLeaves": 5,
+      "remainingLeaves": 25,
+      "pendingRequests": 0,
+      "leaveStatus": "Active"
+    },
+    {
+      "username": "manager.user",
+      "totalLeaves": 30,
+      "usedLeaves": 10,
+      "remainingLeaves": 20,
+      "pendingRequests": 0,
+      "leaveStatus": "Active"
+    },
+    {
+      "username": "john.doe",
+      "totalLeaves": 30,
+      "usedLeaves": 12,
+      "remainingLeaves": 18,
+      "pendingRequests": 1,
+      "leaveStatus": "Active"
+    },
+    {
+      "username": "jane.smith",
+      "totalLeaves": 30,
+      "usedLeaves": 8,
+      "remainingLeaves": 22,
+      "pendingRequests": 0,
+      "leaveStatus": "Active"
+    }
+  ],
+  "leaveApplications": [
+    {
+      "id": "00123",
+      "username": "john.doe",
+      "email": "john.doe@company.com",
+      "leaveType": "Sick Leave",
+      "fromDate": "2025-07-10",
+      "toDate": "2025-07-12",
+      "reason": "Flu",
+      "status": "Approved",
+      "appliedDate": "2025-07-05T10:00:00.000Z",
+      "remarks": "Take care",
+      "approvedBy": "jane.smith",
+      "approvedDate": "2025-07-06T09:00:00.000Z"
+    },
+    {
+      "id": "00124",
+      "username": "john.doe",
+      "email": "john.doe@company.com",
+      "leaveType": "Casual Leave",
+      "fromDate": "2025-07-20",
+      "toDate": "2025-07-22",
+      "reason": "Personal Work",
+      "status": "Pending",
+      "appliedDate": "2025-07-15T14:30:00.000Z",
+      "remarks": ""
+    },
+    {
+      "id": "00125",
+      "username": "jane.smith",
+      "email": "jane.smith@company.com",
+      "leaveType": "Annual Leave",
+      "fromDate": "2025-08-01",
+      "toDate": "2025-08-05",
+      "reason": "Family vacation",
+      "status": "Pending",
+      "appliedDate": "2025-07-20T11:00:00.000Z",
+      "remarks": ""
+    }
+  ]
+}

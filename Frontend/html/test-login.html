@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Login</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    .form-group { margin: 15px 0; }
+    label { display: block; margin-bottom: 5px; }
+    input { padding: 8px; width: 200px; }
+    button { padding: 10px 20px; background: #007BFF; color: white; border: none; cursor: pointer; }
+    .result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+    .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+  </style>
+</head>
+<body>
+  <h1>Test Login</h1>
+  
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter username">
+  </div>
+  
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" id="password" placeholder="Enter password">
+  </div>
+  
+  <button onclick="testLogin()">Test Login</button>
+  
+  <div id="result"></div>
+  
+  <h3>Test Users:</h3>
+  <ul>
+    <li><strong>Username:</strong> demo, <strong>Password:</strong> password123</li>
+    <li><strong>Username:</strong> Reshania, <strong>Password:</strong> (your actual password)</li>
+    <li><strong>Username:</strong> Suruthi, <strong>Password:</strong> (your actual password)</li>
+  </ul>
+  
+  <h3>Backend Status:</h3>
+  <button onclick="checkBackend()">Check Backend</button>
+  <div id="backend-status"></div>
+
+  <script>
+    async function testLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const resultDiv = document.getElementById('result');
+      
+      if (!username || !password) {
+        resultDiv.innerHTML = '<div class="error">Please enter both username and password</div>';
+        return;
+      }
+      
+      try {
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          resultDiv.innerHTML = `<div class="success">✅ Login successful! Redirecting to dashboard...</div>`;
+          setTimeout(() => {
+            window.location.href = `dashboard.html?username=${encodeURIComponent(username)}`;
+          }, 2000);
+        } else {
+          resultDiv.innerHTML = `<div class="error">❌ Login failed: ${result.message}</div>`;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="error">❌ Network error: ${error.message}</div>`;
+        console.error('Login error:', error);
+      }
+    }
+    
+    async function checkBackend() {
+      const statusDiv = document.getElementById('backend-status');
+      
+      try {
+        const response = await fetch('http://localhost:3000/');
+        if (response.ok) {
+          statusDiv.innerHTML = '<div class="success">✅ Backend server is running</div>';
+        } else {
+          statusDiv.innerHTML = '<div class="error">❌ Backend server responded with error</div>';
+        }
+      } catch (error) {
+        statusDiv.innerHTML = `<div class="error">❌ Cannot connect to backend: ${error.message}</div>`;
+      }
+    }
+    
+    // Check backend status on page load
+    window.onload = function() {
+      checkBackend();
+    };
+  </script>
+</body>
+</html>

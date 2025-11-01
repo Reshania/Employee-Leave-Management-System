@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Dashboard Debug Tool</h1>
+    
+    <div class="debug">
+        <h3>Step 1: Check if elements exist</h3>
+        <button onclick="checkElements()">Check Elements</button>
+        <div id="element-check"></div>
+    </div>
+    
+    <div class="debug">
+        <h3>Step 2: Test manual update</h3>
+        <button onclick="testUpdate()">Test Update</button>
+        <div id="update-test"></div>
+    </div>
+    
+    <div class="debug">
+        <h3>Step 3: Fetch real data</h3>
+        <button onclick="fetchRealData()">Fetch Real Data</button>
+        <div id="real-data"></div>
+    </div>
+    
+    <!-- Test elements -->
+    <div style="border: 2px solid #ccc; padding: 20px; margin: 20px 0;">
+        <h3>Test Dashboard Elements:</h3>
+        <p>Sick Leave: <span id="sick-used">0</span> / 12 (Remaining: <span id="sick-remaining">12</span>)</p>
+        <p>Casual Leave: <span id="casual-used">0</span> / 12 (Remaining: <span id="casual-remaining">12</span>)</p>
+        <p>Annual Leave: <span id="annual-used">0</span> / 6 (Remaining: <span id="annual-remaining">6</span>)</p>
+        <p>Pending: <span id="pending-requests">0</span></p>
+    </div>
+    
+    <script>
+        function checkElements() {
+            const elements = ['sick-used', 'sick-remaining', 'casual-used', 'casual-remaining', 'annual-used', 'annual-remaining', 'pending-requests'];
+            let results = '<h4>Element Check Results:</h4>';
+            
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    results += `<p class="success">✅ Found ${id}: "${element.textContent}"</p>`;
+                } else {
+                    results += `<p class="error">❌ Missing ${id}</p>`;
+                }
+            });
+            
+            document.getElementById('element-check').innerHTML = results;
+        }
+        
+        function testUpdate() {
+            const results = '<h4>Manual Update Test:</h4>';
+            
+            try {
+                // Test updating sick leave
+                const sickUsed = document.getElementById('sick-used');
+                const sickRemaining = document.getElementById('sick-remaining');
+                
+                if (sickUsed && sickRemaining) {
+                    sickUsed.textContent = '3';
+                    sickRemaining.textContent = '9';
+                    document.getElementById('update-test').innerHTML = results + '<p class="success">✅ Successfully updated sick leave to 3 used, 9 remaining</p>';
+                } else {
+                    document.getElementById('update-test').innerHTML = results + '<p class="error">❌ Could not find sick leave elements</p>';
+                }
+            } catch (error) {
+                document.getElementById('update-test').innerHTML = results + '<p class="error">❌ Error: ' + error.message + '</p>';
+            }
+        }
+        
+        async function fetchRealData() {
+            const results = '<h4>Real Data Fetch:</h4>';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/leave/Reshania?t=' + Date.now());
+                const data = await response.json();
+                
+                let html = results + '<p class="info">📊 Data received: ' + JSON.stringify(data) + '</p>';
+                
+                // Update elements with real data
+                const sickUsed = document.getElementById('sick-used');
+                const sickRemaining = document.getElementById('sick-remaining');
+                
+                if (sickUsed && sickRemaining) {
+                    sickUsed.textContent = data.sickLeaveUsed || 0;
+                    sickRemaining.textContent = Math.max(0, 12 - (data.sickLeaveUsed || 0));
+                    html += '<p class="success">✅ Updated sick leave with real data</p>';
+                } else {
+                    html += '<p class="error">❌ Could not find sick leave elements</p>';
+                }
+                
+                // Update casual leave
+                const casualUsed = document.getElementById('casual-used');
+                const casualRemaining = document.getElementById('casual-remaining');
+                if (casualUsed && casualRemaining) {
+                    casualUsed.textContent = data.casualLeaveUsed || 0;
+                    casualRemaining.textContent = Math.max(0, 12 - (data.casualLeaveUsed || 0));
+                    html += '<p class="success">✅ Updated casual leave with real data</p>';
+                }
+                
+                // Update annual leave
+                const annualUsed = document.getElementById('annual-used');
+                const annualRemaining = document.getElementById('annual-remaining');
+                if (annualUsed && annualRemaining) {
+                    annualUsed.textContent = data.annualLeaveUsed || 0;
+                    annualRemaining.textContent = Math.max(0, 6 - (data.annualLeaveUsed || 0));
+                    html += '<p class="success">✅ Updated annual leave with real data</p>';
+                }
+                
+                // Update pending requests
+                const pendingRequests = document.getElementById('pending-requests');
+                if (pendingRequests) {
+                    pendingRequests.textContent = data.pendingRequests || 0;
+                    html += '<p class="success">✅ Updated pending requests with real data</p>';
+                }
+                
+                document.getElementById('real-data').innerHTML = html;
+                
+            } catch (error) {
+                document.getElementById('real-data').innerHTML = results + '<p class="error">❌ Error fetching data: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

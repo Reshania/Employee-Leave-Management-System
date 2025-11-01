@@ -1,0 +1,323 @@
+[
+  {
+    "designation": "Software Developer",
+    "contact": "+1-555-0101",
+    "role": "employee",
+    "username": "Reshania",
+    "email": "reshania4506@gmail.com",
+    "password": "$2b$10$jDAoKf2DK0oMA4BdLtmAO.IhuE1CVQgepSJ5DAoLEwUsTZYVnXeKy",
+    "department": "IT",
+    "gender": "Female"
+  },
+  {
+    "designation": "HR Manager",
+    "contact": "+1-555-0102",
+    "role": "employee",
+    "username": "Suruthi",
+    "email": "suru@gmail.com",
+    "password": "$2b$10$pG74CRt6tHsGqYzzdq/LK.sYTaTqCH5ZIfPZQH3hkUwDNwaYnfKHO",
+    "department": "HR",
+    "gender": "Female"
+  },
+  {
+    "designation": "Demo User",
+    "contact": "+1-555-0000",
+    "role": "employee",
+    "username": "demo",
+    "email": "demo@company.com",
+    "password": "$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.",
+    "department": "Testing",
+    "gender": ""
+  },
+  {
+    "designation": "finance manager",
+    "contact": "9043757649",
+    "role": "employee",
+    "username": "Mathi",
+    "email": "mathi@gmail.com",
+    "password": "$2b$10$Y0wNrJ4Bgb9DppWjcZgQLeo6Y14JEh.t3SRD/txCWSHQm1EEPoBnm",
+    "department": "Finance",
+    "gender": ""
+  },
+  {
+    "designation": "System Administrator",
+    "contact": "+1-555-0001",
+    "role": "admin",
+    "username": "admin.user",
+    "email": "admin@company.com",
+    "password": "$2b$10$QM0EFwjrtn4BmgoVkJHDrusAGMX0HYPm01FvVfIsKc6e4RXOwuLLa",
+    "department": "Administration",
+    "gender": ""
+  },
+  {
+    "designation": "Department Manager",
+    "contact": "+1-555-0002",
+    "role": "manager",
+    "username": "manager.user",
+    "email": "manager@company.com",
+    "password": "$2b$10$QM0EFwjrtn4BmgoVkJHDrusAGMX0HYPm01FvVfIsKc6e4RXOwuLLa",
+    "department": "Management",
+    "gender": ""
+  },
+  {
+    "designation": "frontend developer",
+    "contact": "9876546734",
+    "role": "employee",
+    "username": "abinaya",
+    "email": "abi@gmail.com",
+    "password": "$2b$10$nUXPH8RZssrhEvYU0m0CNe259Tx0K3aEEvJ/8EOC4zIN5UNj8XJIq",
+    "department": "IT",
+    "gender": ""
+  },
+  {
+    "designation": "frontend developer",
+    "contact": "0000000000",
+    "role": "employee",
+    "username": "125",
+    "email": "235@ss.com",
+    "password": "$2b$10$nZ0VEm2uM.ANpKxpCMGDbu1awl4xujuZs70lTJ/bCJDIQRM5qUShW",
+    "department": "HR",
+    "gender": ""
+  },
+  {
+    "designation": "frontend",
+    "contact": "8908978624",
+    "role": "employee",
+    "username": "divya",
+    "email": "divya@gmail.com",
+    "password": "$2b$10$6xodXZ8MUnWIEyMckKq1Fex3nYTg8J.VFw9XNDqPGxMmHN7OeEFqW",
+    "department": "IT",
+    "gender": "Female"
+  },
+  {
+    "designation": "frontend",
+    "contact": "8908978624",
+    "role": "employee",
+    "username": "sajin",
+    "email": "sajin@gmail.com",
+    "password": "$2b$10$9SV6OrkgFKq6e/UrmXf5HuonTK9mwRG.z3WLbbcdxW6bGzqeeBK/a",
+    "department": "IT",
+    "gender": "male"
+  },
+  {
+    "designation": "Sales manager",
+    "contact": "9046753465",
+    "role": "employee",
+    "username": "saanya",
+    "email": "saanya@gmail.com",
+    "password": "$2b$10$l9lwBImMVrOpNrijWyF9NO96mkOmxGOTi.et2kRZgOQdOuuxYK0uW",
+    "department": "IT",
+    "gender": "Female"
+  },
+  {
+    "designation": "sales excute",
+    "contact": "4575689723",
+    "role": "employee",
+    "username": "manesha",
+    "email": "manesha@gmail.com",
+    "password": "$2b$10$rW2Oyy46XJfdhZZcIC4mZOsfybFA2kaMhTsJRJ8nrz1WOYdQOpWtC",
+    "department": "Sales",
+    "gender": "Female"
+  },
+  {
+    "designation": "sales excute",
+    "contact": "4575689723",
+    "role": "employee",
+    "username": "57890",
+    "email": "hguojh@gmail.com",
+    "password": "$2b$10$k7gttY.jy.Rw7AqswbEv7OWjCtQNN7wBzMNJPKjM8/xzwb.QfVLAe",
+    "department": "Sales",
+    "gender": ""
+  },
+  {
+    "designation": "HR manger",
+    "contact": "7896421352",
+    "role": "employee",
+    "username": "Rathi",
+    "email": "rathi@gmail.com",
+    "password": "$2b$10$K6gJYAIhvK0qRTrUZjDgq.mqgzbYw.bHezPHet4IbjPf3LdgjAdxW",
+    "department": "HR",
+    "gender": "Female"
+  },
+  {
+    "designation": "officer",
+    "contact": "9043757649",
+    "role": "employee",
+    "username": "Mary",
+    "email": "mary@gmail.com",
+    "password": "$2b$10$nbR8wqLw5RMjjJfDRvQdXONpByhK7IErnnj/DvEzeOXTyylQ2oPsO",
+    "department": "Sales",
+    "gender": ""
+  },
+  {
+    "designation": "frontend developer",
+    "contact": "9043757649",
+    "role": "employee",
+    "username": "res",
+    "email": "res@gmail.com",
+    "password": "$2b$10$dBC8sfySGE2j6bb6CWJozuFhVXZ1410dhyIK7UrTWvYENNO7Uj1Ei",
+    "department": "IT",
+    "gender": ""
+  },
+  {
+    "designation": "frontend developer",
+    "contact": "7896421352",
+    "role": "employee",
+    "username": "jhoiuh",
+    "email": "gfuygh@gmail.com",
+    "password": "$2b$10$MFVRk2be6.EQPMkS9Au7ZOMwYZwCQpBNB8aCrnnQ2A4unbW1r5lHe",
+    "department": "IT",
+    "gender": ""
+  },
+  {
+    "desiation": "Developer",
+    "contact": "1234567890",
+    "role": "employee",
+    "username": "testuser",
+    "email": "test@test.com",
+    "password": "$2b$10$4qmA1CPDGr/Wt19.AdpCzu1QHoOrjFETojBTO.ZcLpWqQLG1CP/nq",
+    "department": "IT",
+    "gender": "",
+    "designation": ""
+  },
+  {
+    "designation": "Developer",
+    "contact": "1234567890",
+    "role": "employee",
+    "username": "testuser2",
+    "email": "test2@test.com",
+    "password": "$2b$10$mchJg.y/iOawLLe1tVIOSesa6fh2dHebsVEAsXhNRlEcS3RmSUk96",
+    "department": "IT",
+    "gender": ""
+  },
+  {
+    "designation": "Developer",
+    "contact": "1234567890",
+    "role": "employee",
+    "username": "testuser3",
+    "email": "test3@test.com",
+    "password": "$2b$10$zea1yAXjbWNtGqprJmzD9udVPAklZUbejt6sW8rR8L.oepTmUsTT6",
+    "department": "IT",
+    "gender": ""
+  },
+  {
+    "designation": "Developer",
+    "contact": "1234567890",
+    "role": "employee",
+    "username": "debuguser",
+    "email": "debug@test.com",
+    "password": "$2b$10$e41PC8UWAPckh.cuwPfpWeolljJ4aZDS83C0fOPDo7GXAnlh8jgG2",
+    "department": "IT",
+    "gender": ""
+  },
+  {
+    "designation": "Developer",
+    "contact": "1234567890",
+    "role": "employee",
+    "username": "testgender",
+    "email": "testgender@test.com",
+    "password": "hashedpassword",
+    "department": "IT",
+    "gender": "Female"
+  },
+  {
+    "designation": "Developer",
+    "contact": "1234567890",
+    "role": "employee",
+    "username": "finaltest",
+    "email": "final@test.com",
+    "password": "$2b$10$bts6BHGRqDDousTMl3g.XemGmMc/DijcigEmAmv8OFvuxCtCtkZUa",
+    "department": "IT",
+    "gender": ""
+  },
+  {
+    "username": "workingtest",
+    "email": "working@test.com",
+    "password": "$2b$10$HAI1tC1n.sD06dTFz3EpdedzhTVPf/1dKubSDgTH6aBhZ5tbooNja",
+    "department": "IT",
+    "designation": "Developer",
+    "contact": "1234567890",
+    "role": "employee",
+    "gender": ""
+  },
+  {
+    "username": "abina",
+    "email": "abina@gmail.com",
+    "password": "$2b$10$SUIsdETfo3hMQ5L/VODs7uDYKC3SUIgi3aEM8X5hR1SQVWCvMGWlG",
+    "department": "HR",
+    "designation": "HR manger",
+    "contact": "7896421352",
+    "gender": "Female",
+    "role": "employee"
+  },
+  {
+    "username": "priya",
+    "email": "priya@gmail.com",
+    "password": "$2b$10$WfZ0GuVjomTXFJQsVL8jxOYgYTfKyGgKyMjbGW8IlpJ8SjiIDy6Ya",
+    "department": "HR",
+    "designation": "HR manger",
+    "contact": "9864572145",
+    "gender": "Female",
+    "role": "employee"
+  },
+  {
+    "username": "Raizal",
+    "email": "razial@gmail.com",
+    "password": "$2b$10$7RnsvU2c6JL.33o5blI58uWhGp.7CaqmADFLlEh7oPqd2RzofGVem",
+    "department": "IT",
+    "designation": "frontend developer",
+    "contact": "9028678943",
+    "gender": "Male",
+    "role": "employee"
+  },
+  {
+    "username": "Rafil",
+    "email": "rafil@gmail.com",
+    "password": "$2b$10$z2kej4xbwryzQa3aRhc0puR3LYMaiXBvvAOaFCb5PIysT/zDiFLUG",
+    "department": "IT",
+    "designation": "officer",
+    "contact": "7786328672",
+    "gender": "Male",
+    "role": "employee"
+  },
+  {
+    "username": "Renuka",
+    "email": "renu@gmail.com",
+    "password": "$2b$10$prywoWi7S6J75ehXbRxNseW5Kn9UGFn/RaeJgO9r2faIRLsVOdA02",
+    "department": "HR",
+    "designation": "HR manger",
+    "contact": "9043757649",
+    "gender": "Female",
+    "role": "employee"
+  },
+  {
+    "username": "Shijin",
+    "email": "shijin@gmail.com",
+    "password": "$2b$10$nj/ozgIR8tO09aoM6yY1ZeohfkhmmdQb4595K.XjrRI.lVcEljKoi",
+    "department": "Sales",
+    "designation": "sales manager",
+    "contact": "8807180147",
+    "gender": "Male",
+    "role": "employee"
+  },
+  {
+    "username": "Leffin",
+    "email": "leffin@gmail.com",
+    "password": "$2b$10$hp7wkCvHLdAupQYqzPsh3uX.j8LEmbgXY/VXHJuRdbCnW1xdW/dMu",
+    "department": "IT",
+    "designation": "frontend developer",
+    "contact": "9347940318",
+    "gender": "Male",
+    "role": "employee"
+  },
+  {
+    "username": "Yuvan",
+    "email": "yuvan@gmail.com",
+    "password": "$2b$10$pokniXt9Fvlg6PJdcFHzYeTT0DyPmA34pC9sXDER2pGEZFirEQp9.",
+    "department": "Marketing",
+    "designation": "finance manager",
+    "contact": "9028904850",
+    "gender": "Male",
+    "role": "employee"
+  }
+]

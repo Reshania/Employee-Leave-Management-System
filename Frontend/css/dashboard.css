@@ -1,0 +1,504 @@
+/* Professional Dashboard CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Professional Color Palette */
+  --primary-color: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #3b82f6;
+  --secondary-color: #64748b;
+  --success-color: #059669;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+  --info-color: #0891b2;
+  
+  /* Neutral Colors */
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  padding: var(--spacing-xl);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.3;
+}
+
+header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+}
+
+header p {
+  font-size: var(--font-size-lg);
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+/* Layout */
+.dashboard-container {
+  display: flex;
+  min-height: calc(100vh - 120px);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: var(--white);
+  padding: var(--spacing-xl);
+  border-right: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light), var(--primary-color));
+}
+
+.sidebar h3 {
+  margin-bottom: var(--spacing-xl);
+  color: var(--gray-800);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.sidebar h3::before {
+  content: '👤';
+  font-size: var(--font-size-lg);
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  color: var(--gray-600);
+  font-weight: 500;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.sidebar a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--primary-color);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition: height 0.2s ease;
+}
+
+.sidebar a:hover {
+  color: var(--primary-color);
+  background: var(--gray-50);
+  transform: translateX(4px);
+}
+
+.sidebar a:hover::before {
+  height: 60%;
+}
+
+.sidebar a.active {
+  color: var(--primary-color);
+  background: var(--gray-50);
+  font-weight: 600;
+}
+
+.sidebar a.active::before {
+  height: 60%;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: var(--spacing-2xl);
+  background: var(--gray-50);
+  overflow-y: auto;
+}
+
+.main-content h2 {
+  color: var(--gray-800);
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.main-content h2::before {
+  content: '📊';
+  font-size: var(--font-size-xl);
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+  margin: var(--spacing-2xl) 0;
+  justify-items: center;
+}
+
+.card {
+  background: var(--white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid var(--gray-200);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card h3 {
+  margin-bottom: var(--spacing-lg);
+  color: var(--gray-700);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.card p {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card .card-description {
+  font-size: var(--font-size-sm);
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+/* Leave Policies */
+.leave-policies {
+  margin-top: var(--spacing-2xl);
+  background: var(--white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  border-left: 4px solid var(--primary-color);
+  box-shadow: var(--shadow-md);
+}
+
+.leave-policies h3 {
+  margin-bottom: var(--spacing-lg);
+  color: var(--gray-800);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.leave-policies h3::before {
+  content: '📋';
+  font-size: var(--font-size-lg);
+}
+
+.leave-policies ul {
+  list-style: none;
+  padding: 0;
+}
+
+.leave-policies li {
+  padding: var(--spacing-sm) 0;
+  color: var(--gray-600);
+  font-size: var(--font-size-base);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.leave-policies li::before {
+  content: '✓';
+  color: var(--success-color);
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+}
+
+/* Footer */
+footer {
+  background: var(--gray-800);
+  color: var(--white);
+  text-align: center;
+  padding: var(--spacing-lg);
+  margin-top: auto;
+  font-size: var(--font-size-sm);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 240px;
+  }
+  
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--gray-200);
+    padding: var(--spacing-lg);
+  }
+  
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+  
+  .sidebar li {
+    margin-bottom: 0;
+  }
+  
+  .sidebar a {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .main-content {
+    padding: var(--spacing-lg);
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .card {
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: var(--spacing-lg);
+  }
+  
+  header h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .main-content {
+    padding: var(--spacing-md);
+  }
+  
+  .card {
+    padding: var(--spacing-md);
+  }
+  
+  .card p {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* Leave Balance Styling */
+.leave-balance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.leave-used {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--danger-color);
+}
+
+.leave-total {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--gray-600);
+}
+
+.leave-remaining {
+  font-size: var(--font-size-sm);
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.leave-remaining span {
+  font-weight: 600;
+  color: var(--success-color);
+}
+
+.leave-attempts {
+  font-size: var(--font-size-xs);
+  color: var(--gray-500);
+  font-weight: 500;
+  margin-top: var(--spacing-xs);
+}
+
+.leave-attempts span {
+  font-weight: 600;
+  color: var(--info-color);
+}
+
+/* Maternity leave card special styling */
+#maternity-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  animation: maternityGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes maternityGlow {
+  from {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  to {
+    box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.3), 0 2px 4px -1px rgba(245, 158, 11, 0.2);
+  }
+}
+
+#maternity-card h3 {
+  color: #92400e;
+}
+
+#maternity-card .leave-used {
+  color: #b45309;
+}
+
+#maternity-card .leave-total {
+  color: #92400e;
+}
+
+#maternity-card .leave-remaining {
+  color: #92400e;
+}
+
+#maternity-card .leave-remaining span {
+  color: #059669;
+}
+
+#maternity-card .leave-attempts {
+  color: #92400e;
+  font-weight: 600;
+}
+
+#maternity-card .leave-attempts span {
+  color: #dc2626;
+  font-weight: 700;
+}
+  

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Test</title>
+    <style>
+        .card { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+        .leave-balance { font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h1>Dashboard Leave Summary Test</h1>
+    
+    <div class="card">
+        <h3>Sick Leave</h3>
+        <div class="leave-balance">
+            <span id="sick-used">0</span> / <span id="sick-total">12</span>
+            <div>Remaining: <span id="sick-remaining">12</span></div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h3>Casual Leave</h3>
+        <div class="leave-balance">
+            <span id="casual-used">0</span> / <span id="casual-total">12</span>
+            <div>Remaining: <span id="casual-remaining">12</span></div>
+        </div>
+    </div>
+    
+    <button onclick="testUpdate()">Test Update</button>
+    <button onclick="fetchData()">Fetch Real Data</button>
+    
+    <div id="result"></div>
+
+    <script>
+        function testUpdate() {
+            console.log('Testing manual update...');
+            
+            // Test if elements exist
+            const sickUsed = document.getElementById('sick-used');
+            const sickRemaining = document.getElementById('sick-remaining');
+            
+            if (sickUsed && sickRemaining) {
+                sickUsed.textContent = '3';
+                sickRemaining.textContent = '9';
+                console.log('✅ Updated elements successfully');
+                document.getElementById('result').innerHTML = '✅ Test update successful!';
+            } else {
+                console.error('❌ Elements not found');
+                document.getElementById('result').innerHTML = '❌ Elements not found';
+            }
+        }
+        
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:3000/api/leave/Reshania?t=' + Date.now());
+                const data = await response.json();
+                
+                console.log('Fetched data:', data);
+                
+                // Update elements with real data
+                document.getElementById('sick-used').textContent = data.sickLeaveUsed || 0;
+                document.getElementById('sick-remaining').textContent = Math.max(0, 12 - (data.sickLeaveUsed || 0));
+                document.getElementById('casual-used').textContent = data.casualLeaveUsed || 0;
+                document.getElementById('casual-remaining').textContent = Math.max(0, 12 - (data.casualLeaveUsed || 0));
+                
+                document.getElementById('result').innerHTML = '✅ Real data loaded successfully!';
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

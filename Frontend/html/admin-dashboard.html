@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Leave Management</title>
+  <link rel="stylesheet" href="../css/admin-dashboard.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Admin Dashboard - Leave Management</h1>
+      <div class="user-info">
+        <span id="currentUser"></span>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+      </div>
+    </header>
+
+    <nav class="admin-nav">
+      <button class="nav-btn active" onclick="showSection('pending')">Pending Applications</button>
+      <button class="nav-btn" onclick="showSection('all')">All Applications</button>
+      <button class="nav-btn" onclick="showSection('stats')">Statistics</button>
+    </nav>
+
+    <main>
+      <!-- Pending Applications Section -->
+      <section id="pending-section" class="section active">
+        <h2>Pending Leave Applications</h2>
+        <div class="applications-container">
+          <div id="pending-applications" class="applications-list">
+            <!-- Pending applications will be loaded here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- All Applications Section -->
+      <section id="all-section" class="section">
+        <h2>All Leave Applications</h2>
+        <div class="applications-container">
+          <div id="all-applications" class="applications-list">
+            <!-- All applications will be loaded here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Statistics Section -->
+      <section id="stats-section" class="section">
+        <h2>Leave Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Applications</h3>
+            <p id="total-applications">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Pending</h3>
+            <p id="pending-count">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Approved</h3>
+            <p id="approved-count">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Rejected</h3>
+            <p id="rejected-count">0</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal for approving/rejecting leave -->
+  <div id="action-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Update Leave Application</h2>
+      <form id="action-form">
+        <input type="hidden" id="application-id">
+        <div class="form-group">
+          <label for="action-status">Action:</label>
+          <select id="action-status" required>
+            <option value="">Select action</option>
+            <option value="Approved">Approve</option>
+            <option value="Rejected">Reject</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="action-remarks">Remarks:</label>
+          <textarea id="action-remarks" rows="3" placeholder="Enter remarks (optional)"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" onclick="closeModal()" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../javascript/popup.js"></script>
+  <script src="../javascript/admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+<body>
+  <header>
+    <h1>Employee Leave Management</h1>
+    <div id="user-info" style="text-align: right; margin-top: 10px; font-size: 14px; color: white;">
+      <!-- User info will be populated by JavaScript -->
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+
+    <aside class="sidebar">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="#" onclick="return false;">Dashboard</a></li>
+        <li><a href="#" onclick="goToPage('applyleave.html')">Apply Leave</a></li>
+        <li><a href="#" onclick="goToPage('leavestatus.html')">Leave Status</a></li>
+        <li><a href="#" onclick="goToPage('myprofile.html')">My Profile</a></li>
+        <li><a href="#" onclick="goToPage('notifications.html')">Notifications</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div>
+          <h2 id="welcome-message">Welcome</h2>
+          <p>Here's a quick overview of your leave summary:</p>
+        </div>
+        <button onclick="refreshDashboard()" style="
+          background: #2563eb;
+          color: white;
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          font-weight: 600;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        " onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563eb'">
+          🔄 Refresh
+        </button>
+      </div>
+
+      <div class="leave-summary-section">
+        <h3 style="margin-bottom: 1rem; color: var(--gray-700); font-size: 1.25rem;">
+          📋 Leave Summary
+        </h3>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Sick Leave</h3>
+          <div class="leave-balance">
+            <span class="leave-used" id="sick-used">0</span> / <span class="leave-total" id="sick-total">12</span>
+            <div class="leave-remaining">Remaining: <span id="sick-remaining">12</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Casual Leave</h3>
+          <div class="leave-balance">
+            <span class="leave-used" id="casual-used">0</span> / <span class="leave-total" id="casual-total">12</span>
+            <div class="leave-remaining">Remaining: <span id="casual-remaining">12</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Annual Leave</h3>
+          <div class="leave-balance">
+            <span class="leave-used" id="annual-used">0</span> / <span class="leave-total" id="annual-total">6</span>
+            <div class="leave-remaining">Remaining: <span id="annual-remaining">6</span></div>
+          </div>
+        </div>
+        <div class="card" id="maternity-card" style="display: none;">
+          <h3>Maternity Leave <span style="font-size: 12px; color: #92400e;">(Female Only)</span></h3>
+          <div class="leave-balance">
+            <span class="leave-used" id="maternity-used">0</span> / <span class="leave-total" id="maternity-total">365</span>
+            <div class="leave-remaining">Remaining: <span id="maternity-remaining">365</span></div>
+            <div class="leave-attempts">Attempts: <span id="maternity-attempts">0</span> / 3</div>
+            <div style="font-size: 11px; color: #92400e; margin-top: 5px; font-style: italic;">
+              💡 365 days (1 year) • Can be taken 3 times in career
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Pending Requests</h3>
+          <p id="pending-requests">0</p>
+        </div>
+      </div>
+
+      <section class="leave-policies">
+        <h3>Leave Policies</h3>
+        <ul>
+          <li><strong>Sick Leave:</strong> 12 days annually - Medical certificate required for more than 2 consecutive days.</li>
+          <li><strong>Casual Leave:</strong> 12 days annually - For personal reasons, advance notice required.</li>
+          <li><strong>Annual Leave:</strong> 6 days annually - For vacation and personal time off.</li>
+          <li><strong>Maternity Leave:</strong> 365 days (1 year) for female employees - Can be taken up to 3 times in career. Available only for female employees.</li>
+          <li>Leave applications must be submitted at least 3 days in advance (except emergency cases).</li>
+          <li>Unused leave cannot be carried over to the next year.</li>
+          <li>Emergency leave should be reported to HR as soon as possible.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Employee Leave Management System</p>
+  </footer>
+
+  <script>
+    // Navigation function to preserve username parameter
+    function goToPage(page) {
+      const params = new URLSearchParams(window.location.search);
+      const username = params.get('username');
+      if (username) {
+        window.location.href = `${page}?username=${encodeURIComponent(username)}`;
+      } else {
+        window.location.href = page;
+      }
+    }
+  </script>
+
+  <script src="../javascript/dashboard.js"></script>
+
+</body>
+</html>

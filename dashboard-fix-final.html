@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Fix Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 15px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 3px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Dashboard Fix Test</h1>
+    
+    <div class="test-section">
+        <h3>Step 1: Test Server Connection</h3>
+        <button onclick="testServer()">Test Server</button>
+        <div id="server-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Step 2: Test Element Detection</h3>
+        <button onclick="testElements()">Check Elements</button>
+        <div id="element-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Step 3: Test Manual Update</h3>
+        <button onclick="testUpdate()">Update Dashboard</button>
+        <div id="update-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Step 4: Copy Fix Code</h3>
+        <button onclick="copyFixCode()">Copy to Clipboard</button>
+        <div id="copy-result" class="result"></div>
+        <textarea id="fix-code" style="width: 100%; height: 200px; margin-top: 10px;" readonly></textarea>
+    </div>
+
+    <script>
+        function testServer() {
+            const result = document.getElementById('server-result');
+            result.innerHTML = 'Testing server...';
+            
+            fetch('http://localhost:3000/api/leave/Reshania')
+                .then(response => response.json())
+                .then(data => {
+                    result.innerHTML = `
+                        <div class="success">✅ Server is working!</div>
+                        <div class="info">
+                            <strong>Data received:</strong><br>
+                            Sick Leave Used: ${data.sickLeaveUsed || 0}<br>
+                            Casual Leave Used: ${data.casualLeaveUsed || 0}<br>
+                            Annual Leave Used: ${data.annualLeaveUsed || 0}<br>
+                            Pending Requests: ${data.pendingRequests || 0}
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    result.innerHTML = `<div class="error">❌ Server error: ${error.message}</div>`;
+                });
+        }
+
+        function testElements() {
+            const result = document.getElementById('element-result');
+            const elements = [
+                'sick-used', 'sick-remaining',
+                'casual-used', 'casual-remaining',
+                'annual-used', 'annual-remaining',
+                'pending-requests'
+            ];
+            
+            let found = [];
+            let missing = [];
+            
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    found.push(id);
+                } else {
+                    missing.push(id);
+                }
+            });
+            
+            let html = '';
+            if (found.length > 0) {
+                html += `<div class="success">✅ Found elements: ${found.join(', ')}</div>`;
+            }
+            if (missing.length > 0) {
+                html += `<div class="error">❌ Missing elements: ${missing.join(', ')}</div>`;
+            }
+            
+            result.innerHTML = html;
+        }
+
+        function testUpdate() {
+            const result = document.getElementById('update-result');
+            result.innerHTML = 'Testing update...';
+            
+            // Simulate updating elements
+            const elements = ['sick-used', 'casual-used', 'annual-used', 'pending-requests'];
+            let updated = 0;
+            
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = '5'; // Test value
+                    updated++;
+                }
+            });
+            
+            if (updated > 0) {
+                result.innerHTML = `<div class="success">✅ Successfully updated ${updated} elements!</div>`;
+            } else {
+                result.innerHTML = `<div class="error">❌ No elements found to update</div>`;
+            }
+        }
+
+        function copyFixCode() {
+            const fixCode = `
+// EXACT FIX FOR YOUR DASHBOARD - Run this in your main dashboard console
+
+console.log('🔧 Starting dashboard fix...');
+
+// Step 1: Check if elements exist
+const elements = ['sick-used', 'sick-remaining', 'casual-used', 'casual-remaining', 'annual-used', 'annual-remaining', 'pending-requests'];
+console.log('Checking elements...');
+elements.forEach(id => {
+    const element = document.getElementById(id);
+    console.log(\`\${id}: \${element ? '✅ Found' : '❌ Missing'}\`);
+});
+
+// Step 2: Fetch data and update
+fetch('http://localhost:3000/api/leave/Reshania?t=' + Date.now())
+    .then(response => response.json())
+    .then(data => {
+        console.log('📊 Data received:', data);
+        
+        // Update sick leave
+        const sickUsed = document.getElementById('sick-used');
+        const sickRemaining = document.getElementById('sick-remaining');
+        if (sickUsed) {
+            sickUsed.textContent = data.sickLeaveUsed || 0;
+            console.log('✅ Updated sick-used to:', data.sickLeaveUsed);
+        }
+        if (sickRemaining) {
+            sickRemaining.textContent = Math.max(0, 12 - (data.sickLeaveUsed || 0));
+            console.log('✅ Updated sick-remaining to:', Math.max(0, 12 - (data.sickLeaveUsed || 0)));
+        }
+        
+        // Update casual leave
+        const casualUsed = document.getElementById('casual-used');
+        const casualRemaining = document.getElementById('casual-remaining');
+        if (casualUsed) {
+            casualUsed.textContent = data.casualLeaveUsed || 0;
+            console.log('✅ Updated casual-used to:', data.casualLeaveUsed);
+        }
+        if (casualRemaining) {
+            casualRemaining.textContent = Math.max(0, 12 - (data.casualLeaveUsed || 0));
+            console.log('✅ Updated casual-remaining to:', Math.max(0, 12 - (data.casualLeaveUsed || 0)));
+        }
+        
+        // Update annual leave
+        const annualUsed = document.getElementById('annual-used');
+        const annualRemaining = document.getElementById('annual-remaining');
+        if (annualUsed) {
+            annualUsed.textContent = data.annualLeaveUsed || 0;
+            console.log('✅ Updated annual-used to:', data.annualLeaveUsed);
+        }
+        if (annualRemaining) {
+            annualRemaining.textContent = Math.max(0, 6 - (data.annualLeaveUsed || 0));
+            console.log('✅ Updated annual-remaining to:', Math.max(0, 6 - (data.annualLeaveUsed || 0)));
+        }
+        
+        // Update pending requests
+        const pendingRequests = document.getElementById('pending-requests');
+        if (pendingRequests) {
+            pendingRequests.textContent = data.pendingRequests || 0;
+            console.log('✅ Updated pending-requests to:', data.pendingRequests);
+        }
+        
+        console.log('🎉 Dashboard update completed!');
+    })
+    .catch(error => {
+        console.error('❌ Error:', error);
+    });
+            `;
+            
+            document.getElementById('fix-code').value = fixCode;
+            document.getElementById('copy-result').innerHTML = '<div class="success">✅ Fix code ready! Copy from the textarea below.</div>';
+        }
+    </script>
+</body>
+</html>

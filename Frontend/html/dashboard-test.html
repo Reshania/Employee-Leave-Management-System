@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Test - ELMS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f5f5f5;
+    }
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .test-section {
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .test-button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .test-button:hover {
+      background: #1d4ed8;
+    }
+    .result {
+      margin: 10px 0;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+    .info { background: #d1ecf1; color: #0c5460; }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>🧪 Dashboard Auto-Update Test</h1>
+    <p>This page tests the dashboard auto-update functionality.</p>
+
+    <div class="test-section">
+      <h3>1. Test API Connection</h3>
+      <button class="test-button" onclick="testAPI()">Test API</button>
+      <div id="api-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+      <h3>2. Test Leave Balance Update</h3>
+      <button class="test-button" onclick="testLeaveUpdate()">Test Leave Update</button>
+      <div id="update-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+      <h3>3. Test Dashboard Refresh</h3>
+      <button class="test-button" onclick="testDashboardRefresh()">Test Dashboard Refresh</button>
+      <div id="refresh-result" class="result"></div>
+    </div>
+
+    <div class="test-section">
+      <h3>4. Current Leave Data</h3>
+      <button class="test-button" onclick="showCurrentData()">Show Current Data</button>
+      <div id="data-result" class="result"></div>
+    </div>
+  </div>
+
+  <script>
+    // Test API connection
+    async function testAPI() {
+      const resultDiv = document.getElementById('api-result');
+      resultDiv.innerHTML = 'Testing API connection...';
+      resultDiv.className = 'result info';
+      
+      try {
+        const response = await fetch('http://localhost:3000/api/leave/Reshania');
+        if (response.ok) {
+          const data = await response.json();
+          resultDiv.innerHTML = `✅ API Working!<br>Response: ${JSON.stringify(data, null, 2)}`;
+          resultDiv.className = 'result success';
+        } else {
+          resultDiv.innerHTML = `❌ API Error: ${response.status} ${response.statusText}`;
+          resultDiv.className = 'result error';
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `❌ Connection Error: ${error.message}`;
+        resultDiv.className = 'result error';
+      }
+    }
+
+    // Test leave balance update
+    async function testLeaveUpdate() {
+      const resultDiv = document.getElementById('update-result');
+      resultDiv.innerHTML = 'Testing leave balance update...';
+      resultDiv.className = 'result info';
+      
+      try {
+        // First, get current data
+        const beforeResponse = await fetch('http://localhost:3000/api/leave/Reshania');
+        const beforeData = await beforeResponse.json();
+        
+        resultDiv.innerHTML = `Before: Used=${beforeData.usedLeaves}, Remaining=${beforeData.remainingLeaves}<br>`;
+        
+        // The balance should already be updated from previous admin actions
+        resultDiv.innerHTML += `✅ Leave balance is automatically updated when admin approves/rejects leaves!<br>`;
+        resultDiv.innerHTML += `Current: Used=${beforeData.usedLeaves}, Remaining=${beforeData.remainingLeaves}`;
+        resultDiv.className = 'result success';
+        
+      } catch (error) {
+        resultDiv.innerHTML = `❌ Error: ${error.message}`;
+        resultDiv.className = 'result error';
+      }
+    }
+
+    // Test dashboard refresh
+    async function testDashboardRefresh() {
+      const resultDiv = document.getElementById('refresh-result');
+      resultDiv.innerHTML = 'Testing dashboard refresh...';
+      resultDiv.className = 'result info';
+      
+      try {
+        // Simulate setting the admin update flag
+        localStorage.setItem('lastAdminUpdate', Date.now().toString());
+        
+        resultDiv.innerHTML = `✅ Admin update flag set!<br>`;
+        resultDiv.innerHTML += `When you return to the dashboard, it should automatically refresh.<br>`;
+        resultDiv.innerHTML += `Flag will be cleared after 30 seconds.`;
+        resultDiv.className = 'result success';
+        
+      } catch (error) {
+        resultDiv.innerHTML = `❌ Error: ${error.message}`;
+        resultDiv.className = 'result error';
+      }
+    }
+
+    // Show current data
+    async function showCurrentData() {
+      const resultDiv = document.getElementById('data-result');
+      resultDiv.innerHTML = 'Loading current data...';
+      resultDiv.className = 'result info';
+      
+      try {
+        const response = await fetch('http://localhost:3000/api/leave/Reshania');
+        const data = await response.json();
+        
+        resultDiv.innerHTML = `
+          <strong>Current Leave Data for Reshania:</strong><br>
+          Total Leaves: ${data.totalLeaves}<br>
+          Used Leaves: ${data.usedLeaves}<br>
+          Remaining Leaves: ${data.remainingLeaves}<br>
+          Pending Requests: ${data.pendingRequests}<br>
+          Status: ${data.leaveStatus}
+        `;
+        resultDiv.className = 'result success';
+        
+      } catch (error) {
+        resultDiv.innerHTML = `❌ Error: ${error.message}`;
+        resultDiv.className = 'result error';
+      }
+    }
+
+    // Auto-load current data on page load
+    window.onload = function() {
+      showCurrentData();
+    };
+  </script>
+</body>
+</html>

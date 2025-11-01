@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My Profile</title>
+  <link rel="stylesheet" href="../css/myprofile.css">
+</head>
+<body>
+  <div class="page-header">
+    <h2>My Profile</h2>
+    <p>Update your personal information</p>
+  </div>
+
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-avatar">👤</div>
+      <h3>Profile Information</h3>
+      <p>Keep your information up to date</p>
+    </div>
+
+    <form id="profileForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name" class="required">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="required">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="department" class="required">Department</label>
+          <input type="text" id="department" name="department" required>
+        </div>
+
+        <div class="form-group">
+          <label for="designation" class="required">Designation</label>
+          <input type="text" id="designation" name="designation" required>
+        </div>
+
+        <div class="form-group">
+          <label for="gender" class="required">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="">-- Select Gender --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="contact" class="required">Contact Number</label>
+          <input type="text" id="contact" name="contact" required>
+        </div>
+      </div>
+
+      <input type="submit" value="Update Profile">
+    </form>
+  </div>
+
+  <script src="../javascript/popup.js"></script>
+  <script src="../javascript/myprofile.js"></script>
+</body>
+</html>

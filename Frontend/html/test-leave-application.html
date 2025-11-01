@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Leave Application</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    .form-group { margin: 15px 0; }
+    label { display: block; margin-bottom: 5px; }
+    input, select, textarea { padding: 8px; width: 200px; }
+    button { padding: 10px 20px; background: #007BFF; color: white; border: none; cursor: pointer; margin: 5px; }
+    .result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+    .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+  </style>
+</head>
+<body>
+  <h1>Test Leave Application</h1>
+  
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" id="username" value="demo" readonly>
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" value="demo@company.com" readonly>
+  </div>
+  
+  <div class="form-group">
+    <label for="leave-type">Leave Type:</label>
+    <select id="leave-type">
+      <option value="Sick Leave">Sick Leave</option>
+      <option value="Casual Leave">Casual Leave</option>
+      <option value="Annual Leave">Annual Leave</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="from-date">From Date:</label>
+    <input type="date" id="from-date">
+  </div>
+  
+  <div class="form-group">
+    <label for="to-date">To Date:</label>
+    <input type="date" id="to-date">
+  </div>
+  
+  <div class="form-group">
+    <label for="reason">Reason:</label>
+    <textarea id="reason" rows="3" cols="30">Test leave application</textarea>
+  </div>
+  
+  <button onclick="testLeaveApplication()">Test Leave Application</button>
+  <button onclick="checkBackendStatus()">Check Backend Status</button>
+  <button onclick="testLeaveData()">Test Leave Data</button>
+  
+  <div id="result"></div>
+  
+  <h3>Instructions:</h3>
+  <ol>
+    <li>Set dates (from date should be at least 3 days from today)</li>
+    <li>Click "Test Leave Application" to submit</li>
+    <li>Check browser console for detailed logs</li>
+    <li>Check backend terminal for server logs</li>
+  </ol>
+
+  <script>
+    // Set minimum dates
+    const minDate = new Date();
+    minDate.setDate(minDate.getDate() + 3);
+    document.getElementById('from-date').min = minDate.toISOString().split('T')[0];
+    
+    document.getElementById('from-date').addEventListener('change', function() {
+      document.getElementById('to-date').min = this.value;
+    });
+
+    async function testLeaveApplication() {
+      const resultDiv = document.getElementById('result');
+      
+      const leaveData = {
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        leaveType: document.getElementById('leave-type').value,
+        fromDate: document.getElementById('from-date').value,
+        toDate: document.getElementById('to-date').value,
+        reason: document.getElementById('reason').value,
+        status: 'Pending'
+      };
+      
+      console.log('Submitting leave application:', leaveData);
+      
+      try {
+        const response = await fetch('http://localhost:3000/api/leave/apply', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(leaveData),
+        });
+        
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+        
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Success:', result);
+          resultDiv.innerHTML = `<div class="success">✅ Leave application submitted successfully!<br>Application ID: ${result.application.id}</div>`;
+        } else {
+          const error = await response.json();
+          console.error('Error response:', error);
+          resultDiv.innerHTML = `<div class="error">❌ Failed: ${error.message}</div>`;
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+        resultDiv.innerHTML = `<div class="error">❌ Network error: ${error.message}</div>`;
+      }
+    }
+    
+    async function checkBackendStatus() {
+      const resultDiv = document.getElementById('result');
+      
+      try {
+        const response = await fetch('http://localhost:3000/');
+        if (response.ok) {
+          resultDiv.innerHTML = `<div class="info">ℹ️ Backend server is running (Status: ${response.status})</div>`;
+        } else {
+          resultDiv.innerHTML = `<div class="error">❌ Backend error: ${response.status}</div>`;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="error">❌ Cannot connect to backend: ${error.message}</div>`;
+      }
+    }
+    
+    async function testLeaveData() {
+      const resultDiv = document.getElementById('result');
+      const username = document.getElementById('username').value;
+      
+      try {
+        const response = await fetch(`http://localhost:3000/api/leave/${username}`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Leave data:', data);
+          resultDiv.innerHTML = `<div class="info">ℹ️ Leave data found: ${JSON.stringify(data, null, 2)}</div>`;
+        } else {
+          const error = await response.json();
+          resultDiv.innerHTML = `<div class="error">❌ Leave data error: ${error.message}</div>`;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<div class="error">❌ Error fetching leave data: ${error.message}</div>`;
+      }
+    }
+    
+    // Auto-set some dates for testing
+    window.onload = function() {
+      const fromDate = new Date();
+      fromDate.setDate(fromDate.getDate() + 3);
+      document.getElementById('from-date').value = fromDate.toISOString().split('T')[0];
+      
+      const toDate = new Date();
+      toDate.setDate(toDate.getDate() + 5);
+      document.getElementById('to-date').value = toDate.toISOString().split('T')[0];
+    };
+  </script>
+</body>
+</html>
