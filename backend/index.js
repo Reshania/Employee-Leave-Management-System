@@ -29,7 +29,7 @@ app.use(express.static(frontendPath));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.redirect('/html/index.html');
+   res.sendFile(path.join(frontendPath, 'html', 'index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
