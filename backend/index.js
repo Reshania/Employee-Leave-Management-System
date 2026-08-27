@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 app.use('/api/leave', leaveRoutes);
 app.get('/api/notifications/:username', getNotifications);
-app.use('/api/notifications', Routes);
+
 app.use('/api', Routes);
 
 app.use(express.static(frontendPath));
