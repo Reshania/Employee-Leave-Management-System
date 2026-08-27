@@ -34,6 +34,9 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
   res.sendFile(path.join(frontendPath, 'html', 'login.html'));
 });
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'html', 'register.html'));
+});
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
