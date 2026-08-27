@@ -31,6 +31,9 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
    res.sendFile(path.join(frontendPath, 'html', 'index.html'));
 });
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'html', 'login.html'));
+});
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
