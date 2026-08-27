@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
       // Fetch user profile from backend
-      const res = await fetch(`http://localhost:3000/profile/${username}`);
+      const res = await fetch(`/profile/${username}`);
       const user = await res.json();
 
       if (res.ok) {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     try {
-      const res = await fetch('http://localhost:3000/update-profile', {
+      const res = await fetch('/update-profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedUser),

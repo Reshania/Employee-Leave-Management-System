@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/leave/${username}`);
+      const response = await fetch(`/api/leave/${username}`);
       
       if (response.ok) {
         const leaveData = await response.json();

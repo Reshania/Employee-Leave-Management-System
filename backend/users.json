@@ -319,5 +319,15 @@
     "contact": "9028904850",
     "gender": "Male",
     "role": "employee"
+  },
+  {
+    "username": "Yathi",
+    "email": "yathi@gmail.com",
+    "password": "$2b$10$xA/96ZkZnTMyr03jFmJ7T.yeBmINZ4IJqwxSGTMrOv06HETT5Kgtq",
+    "department": "HR",
+    "designation": "HR manger",
+    "contact": "9043757649",
+    "gender": "Female",
+    "role": "employee"
   }
 ]

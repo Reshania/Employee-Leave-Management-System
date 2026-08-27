@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/notifications/${username}`);
+      const response = await fetch(`/api/notifications/${username}`);
       
       if (response.ok) {
         const notifications = await response.json();

@@ -30,7 +30,7 @@ async function loadDashboard() {
   try {
     // Load user profile to get gender
     let userGender = '';
-    const profileResponse = username ? await fetch(`http://localhost:3000/profile/${username}`) : { ok: false };
+    const profileResponse = username ? await fetch(`/profile/${username}`) : { ok: false };
     
     if (profileResponse.ok) {
       const profile = await profileResponse.json();
@@ -67,7 +67,7 @@ async function loadDashboard() {
       if (maternityCard) maternityCard.style.display = (userGender === 'Female') ? 'block' : 'none';
       return;
     }
-    const response = await fetch(`http://localhost:3000/api/leave/${username}?t=${Date.now()}`);
+    const response = await fetch(`/api/leave/${username}?t=${Date.now()}`);
     console.log('Leave API response status:', response.status);
 
     if (!response.ok) {
@@ -420,7 +420,7 @@ function forceUpdateDashboard() {
   console.log('📡 Fetching data for:', username);
   
   // Fetch data and update elements directly
-  fetch(`http://localhost:3000/api/leave/${username}?t=${Date.now()}`)
+  fetch(`/api/leave/${username}?t=${Date.now()}`)
     .then(response => response.json())
     .then(data => {
       console.log('📊 Data received:', data);

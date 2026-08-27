@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/leave/status/${username}`);
+      const response = await fetch(`/api/leave/status/${username}`);
       
       if (response.ok) {
         const leaveData = await response.json();

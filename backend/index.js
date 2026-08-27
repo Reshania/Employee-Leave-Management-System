@@ -1,34 +1,37 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import Routes from './routes/userRoutes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import Routes from './routes/userRoutes.js';
 import leaveRoutes from './routes/leaveRoutes.js';
+import { getNotifications } from './controller/userController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const frontendPath = path.join(__dirname, '..', 'Frontend');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-// API routes - specific paths first
 app.use('/api/leave', leaveRoutes);
+app.get('/api/notifications/:username', getNotifications);
 app.use('/api/notifications', Routes);
-
-// User routes (including login and register) - general paths last
 app.use('/', Routes);
 
-// Serve static files
+app.use(express.static(frontendPath));
 app.use(express.static('public'));
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Login endpoint: http://localhost:${PORT}/login`);
-  console.log(`Register endpoint: http://localhost:${PORT}/register`);
-  console.log(`Leave API endpoint: http://localhost:${PORT}/api/leave`);
-  console.log(`Notifications endpoint: http://localhost:${PORT}/api/notifications`);
+app.get('/', (req, res) => {
+  res.redirect('/html/index.html');
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });

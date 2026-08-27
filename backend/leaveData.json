@@ -401,5 +401,18 @@
     "annualLeaveUsed": 0,
     "maternityLeaveUsed": 0,
     "maternityLeaveAttempts": 0
+  },
+  {
+    "username": "Yathi",
+    "totalLeaves": 30,
+    "usedLeaves": 0,
+    "remainingLeaves": 30,
+    "pendingRequests": 0,
+    "leaveStatus": "Active",
+    "sickLeaveUsed": 0,
+    "casualLeaveUsed": 0,
+    "annualLeaveUsed": 0,
+    "maternityLeaveUsed": 0,
+    "maternityLeaveAttempts": 0
   }
 ]

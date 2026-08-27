@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Auto-filled name with username:', username);
     
     // Try to fetch user details to auto-fill email
-    fetch(`http://localhost:3000/profile/${username}`)
+    fetch(`/profile/${username}`)
       .then(response => response.json())
       .then(user => {
         if (user.email) {
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       // Submit leave application
-      const response = await fetch('http://localhost:3000/api/leave/apply', {
+      const response = await fetch('/api/leave/apply', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -271,7 +271,7 @@ function getMaxDaysForLeaveType(leaveType) {
 // Helper function to get user gender
 async function getUserGender(username) {
   try {
-    const response = await fetch(`http://localhost:3000/profile/${username}`);
+    const response = await fetch(`/profile/${username}`);
     if (response.ok) {
       const profile = await response.json();
       return profile.gender || 'Male';
@@ -285,7 +285,7 @@ async function getUserGender(username) {
 // Helper function to check leave balance
 async function checkLeaveBalance(username, leaveType, requestedDays) {
   try {
-    const response = await fetch(`http://localhost:3000/api/leave/${username}`);
+    const response = await fetch(`/api/leave/${username}`);
     if (response.ok) {
       const user = await response.json();
       
@@ -337,7 +337,7 @@ async function checkLeaveBalance(username, leaveType, requestedDays) {
 // Helper function to get maternity leave attempts
 async function getMaternityLeaveAttempts(username) {
   try {
-    const response = await fetch(`http://localhost:3000/api/leave/${username}`);
+    const response = await fetch(`/api/leave/${username}`);
     if (response.ok) {
       const user = await response.json();
       return user.maternityLeaveAttempts || 0;
