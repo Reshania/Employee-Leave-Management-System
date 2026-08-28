@@ -47,7 +47,7 @@
     if (response.ok) {
       showSuccess('Registration successful!', 'Welcome');
       setTimeout(() => {
-        window.location.href = 'login.html';
+        window.location.href = '/login';
       }, 1500);
     } else {
       showError(result.message || 'Registration failed.', 'Registration Error');

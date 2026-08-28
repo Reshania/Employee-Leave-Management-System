@@ -37,7 +37,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
       if (result.role === 'admin' || result.role === 'manager') {
         window.location.href = 'admin-dashboard.html';
       } else {
-        window.location.href = `dashboard.html?username=${encodeURIComponent(username)}`;
+        window.location.href = `/dashboard?username=${encodeURIComponent(username)}`;
       }
     } else {
       showError(result.message || 'Login failed. Please check your credentials.', 'Login Failed');
