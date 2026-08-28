@@ -41,6 +41,30 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(frontendPath, 'html', 'dashboard.html'));
 });
 
+
+app.get('/applyleave', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'html', 'applyleave.html'));
+});
+
+app.get('/leave-overview', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'html', 'leave-overview.html'));
+});
+
+app.get('/leavestatus', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'html', 'leavestatus.html'));
+});
+
+app.get('/myprofile', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'html', 'myprofile.html'));
+});
+
+app.get('/notifications', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'html', 'notifications.html'));
+});
+app.get('/viewleaveapplication', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'html', 'viewleaveapplication.html'));
+});
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
